@@ -1204,7 +1204,11 @@ qboolean Voice_Init( const char *pszCodecName, int quality, qboolean preinit )
 		return false;
 	}
 
+#ifdef EMSCRIPTEN
+	voice.device_opened = false;
+#else
 	voice.device_opened = VoiceCapture_Init();
+#endif
 
 	if( !voice.device_opened )
 		Con_Printf( S_WARN "No microphone is available.\n" );
