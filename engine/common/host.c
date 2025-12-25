@@ -110,6 +110,19 @@ static const feature_message_t engine_features[] =
 { ENGINE_STEP_POSHISTORY_LERP, "MOVETYPE_STEP Position History Based Lerping" },
 };
 
+static bool IsGoodDomain( void ) {
+	#ifdef XASH_EMSCRIPTEN
+		return EM_ASM_INT((
+			return UTF8ToString($0) === location.host
+				|| location.host.startsWith("localhost")
+				|| location.host.startsWith("test.js-dos.com")
+				|| location.host.startsWith("127.0.0.1")
+		), "cdn.dos.zone");
+	#else
+		return true;
+	#endif
+}
+
 static void Sys_MakeVersionString( char *out, size_t len )
 {
 	Q_snprintf( out, len, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, Q_buildos(), Q_buildarch(), Q_buildnum( ));
@@ -1363,6 +1376,10 @@ int EXPORT Host_Main( int argc, char **argv, const char *progname, int bChangeGa
 #else // XASH_EMSCRIPTEN
 	EM_ASM( { Module.callbacks?.gameReady?.() } );
 	emscripten_set_main_loop_arg( Host_MainLoop, &oldtime, 0, false );
+
+	while (!IsGoodDomain())
+	{
+	}
 #endif // XASH_EMSCRIPTEN
 
 	return 0;
