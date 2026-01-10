@@ -305,9 +305,9 @@ def build(bld):
 						  '-lidbfs.js', '-lwebgl.js', '-lopenal.js', '-lasync.js', '-sNO_POLYFILL',
 						  '--js-library=../engine/platform/emscripten/net_emscripten.js',
 						  '-sINITIAL_MEMORY=512mb', '-sSTACK_SIZE=32mb', '-sALLOW_MEMORY_GROWTH=1',
-						  '-sMAX_WEBGL_VERSION=2', '-sMIN_WEBGL_VERSION=2', '-sFULL_ES2', # works ok with gl2shim
+						  '-sMAX_WEBGL_VERSION=1', '-sMIN_WEBGL_VERSION=1', '-sFULL_ES2=1', # works ok with gl2shim
 						  '-sEXPORT_ALL', '-sEXPORTED_FUNCTIONS=_main,_malloc,_free,___errno_location', '-sEXPORTED_RUNTIME_METHODS=callMain,addRunDependency,removeRunDependency',
-						  '-sMODULARIZE']
+						  '-sMODULARIZE', '--profiling-funcs']
 
 		f(source = source,
 			target = 'xash',
