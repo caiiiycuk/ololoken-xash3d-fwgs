@@ -1343,6 +1343,8 @@ obsolete
 */
 void GL_CheckForErrors_( const char *filename, const int fileline )
 {
+#ifdef EMSCRIPTEN
+#else
 	int	err;
 
 	if( !gl_check_errors.value )
@@ -1352,6 +1354,7 @@ void GL_CheckForErrors_( const char *filename, const int fileline )
 		return;
 
 	gEngfuncs.Con_Printf( S_OPENGL_ERROR "%s (at %s:%i)\n", GL_ErrorString( err ), filename, fileline );
+#endif
 }
 
 void GL_SetupAttributes( int safegl )

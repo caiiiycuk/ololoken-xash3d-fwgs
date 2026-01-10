@@ -17,6 +17,10 @@ GNU General Public License for more details.
 #include "xash3d_mathlib.h"
 #include "mod_local.h"
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 typedef struct
 {
 	int		allocated[BLOCK_SIZE_MAX];
@@ -917,6 +921,14 @@ static void DrawGLPolyChain( glpoly2_t *p, float soffset, float toffset )
 
 static qboolean R_HasLightmap( void )
 {
+#ifdef EMSCRIPTEN
+	if (EM_ASM_INT({
+		return window.lightmaps ? 1 : 0;
+	}) == 0) {
+		return false;
+	}
+#endif
+
 	if( r_fullbright->value || !WORLDMODEL->lightdata )
 		return false;
 
