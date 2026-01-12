@@ -923,7 +923,7 @@ static qboolean R_HasLightmap( void )
 {
 #ifdef EMSCRIPTEN
 	if (EM_ASM_INT({
-		return window.lightmaps ? 1 : 0;
+		return window.glConfig.lightmaps ? 1 : 0;
 	}) == 0) {
 		return false;
 	}
