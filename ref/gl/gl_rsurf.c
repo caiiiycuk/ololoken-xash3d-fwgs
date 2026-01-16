@@ -921,14 +921,6 @@ static void DrawGLPolyChain( glpoly2_t *p, float soffset, float toffset )
 
 static qboolean R_HasLightmap( void )
 {
-#ifdef EMSCRIPTEN
-	if (EM_ASM_INT({
-		return window.glConfig.lightmaps ? 1 : 0;
-	}) == 0) {
-		return false;
-	}
-#endif
-
 	if( r_fullbright->value || !WORLDMODEL->lightdata )
 		return false;
 
