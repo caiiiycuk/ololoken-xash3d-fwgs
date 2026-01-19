@@ -308,7 +308,7 @@ def build(bld):
 						  '-sMAX_WEBGL_VERSION=2', '-sMIN_WEBGL_VERSION=2', '-sFULL_ES2=1', # works ok with gl2shim
 						  '-sEXPORT_ALL', '-sEXPORTED_FUNCTIONS=_main,_malloc,_free,___errno_location', '-sEXPORTED_RUNTIME_METHODS=callMain,addRunDependency,removeRunDependency',
 						  '-sGL_POOL_TEMP_BUFFERS=0', '-sGL_PREINITIALIZED_CONTEXT=1', '-sMODULARIZE', 
-						  '--profiling-funcs',
+						  # '--profiling-funcs',
 						  ]
 
 		f(source = source,
