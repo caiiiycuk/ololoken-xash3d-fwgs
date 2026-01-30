@@ -1516,6 +1516,7 @@ void Key_Console( int key )
 			strstr( con.input.buffer, "name" )
 			|| strstr( con.input.buffer, "sv_cheats" )
 			|| strstr( con.input.buffer, "god" )
+			|| strstr( con.input.buffer, "sys_timescale" )
 		) {
 			Con_ClearField( &con.input );
 			return;
