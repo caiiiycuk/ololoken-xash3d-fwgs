@@ -1210,7 +1210,9 @@ static void Host_MainLoop( void *userdata )
 #ifdef EMSCRIPTEN
 	EM_ASM((
 		net.wait(4);
-		window.postMessage({ event: 'mp.room.mainLoop' }, '*');
+		if (window.top) {
+			window.top.postMessage({ event: 'mp.room.mainLoop' }, '*');
+		}
 	));
 #endif
 	COM_Frame( newtime - *poldtime );
