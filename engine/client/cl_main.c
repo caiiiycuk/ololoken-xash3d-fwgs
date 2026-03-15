@@ -1178,7 +1178,7 @@ static int CL_GetTestFragmentSize( void )
 
 	// it turns out, even if we pass the bandwidth test, it doesn't mean we can use such large fragments
 	// as a temporary solution, use smaller fragment sizes
-	const int fragmentSizes[CL_TEST_RETRIES] = { 1400, 1200, 1000, 800, 508 };
+	const int fragmentSizes[CL_TEST_RETRIES] = { 1200, 1200, 1200, 1000, 800, 508 };
 	if( cls.connect_retry >= 0 && cls.connect_retry < CL_TEST_RETRIES )
 		return bound( FRAGMENT_MIN_SIZE, fragmentSizes[cls.connect_retry], FRAGMENT_MAX_SIZE );
 	else
